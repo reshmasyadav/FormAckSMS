@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Submitted Data</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #d7fcb2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .table-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .action-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .action-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Styles for the scrollable section */
+        .scrollable-data {
+            max-height: 400px;  /* Maximum height for scrollable section */
+            overflow-y: auto;   /* Enable vertical scrolling */
+            margin-top: 20px;
+            display: none;      /* Initially hide */
+        }
+
+        .show-hide-button {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .back-button, .home-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button {
+            left: 20px;
+        }
+
+        .home-button {
+            right: 20px;
+        }
+
+        .back-button:hover, .home-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <h2>All Submitted Data</h2>
+
+    <!-- View All Data Button -->
+    <button class="show-hide-button" id="viewAllBtn" onclick="toggleDataVisibility()">View All Submitted Data</button>
+
+    <!-- Scrollable Data Section -->
+    <div id="scrollableData" class="scrollable-data">
+        <table>
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>E-mail</th>
+                <th>PRN Number</th>
+                <th>College Name</th>
+                <th>Gender</th>
+                <th>Contact</th>
+                <th>Degree</th>
+                <th>Course</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop to show all submissions -->
+            <tr th:each="submission : ${submissions}">
+                <td th:text="${submission.firstName}"></td>
+                <td th:text="${submission.lastName}"></td>
+                <td th:text="${submission.email}"></td>
+                <td th:text="${submission.prnNumber}"></td>
+                <td th:text="${submission.collegeName}"></td>
+                <td th:text="${submission.gender}"></td>
+                <td th:text="${submission.contact}"></td>
+                <td th:text="${submission.degree}"></td>
+                <td th:text="${submission.course}"></td>
+                <td th:text="${submission.address}"></td>
+                <td>
+                    <!-- Store the PRN number in data-prn attribute -->
+                    <button class="action-btn" th:data-prn="${submission.prnNumber}" onclick="deleteData(this)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Hide All Data Button -->
+    <button class="show-hide-button" id="hideAllBtn" onclick="toggleDataVisibility()" style="display: none;">Hide All Data</button>
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">Back</a>
+
+    <!-- Back to Home Button -->
+    <a href="/" class="home-button">Go Home</a>
+
+</div>
+
+<script>
+    // Function to toggle visibility of data
+    function toggleDataVisibility() {
+        var dataSection = document.getElementById("scrollableData");
+        var viewAllBtn = document.getElementById("viewAllBtn");
+        var hideAllBtn = document.getElementById("hideAllBtn");
+
+        if (dataSection.style.display === "none" || dataSection.style.display === "") {
+            dataSection.style.display = "block";  // Show the data section
+            viewAllBtn.style.display = "none";    // Hide the "View All" button
+            hideAllBtn.style.display = "block";   // Show the "Hide All" button
+        } else {
+            dataSection.style.display = "none";   // Hide the data section
+            viewAllBtn.style.display = "block";   // Show the "View All" button
+            hideAllBtn.style.display = "none";    // Hide the "Hide All" button
+        }
+    }
+
+    // Function to handle deletion
+    function deleteData(button) {
+        const prn = button.getAttribute('data-prn'); // Get PRN number from data-prn attribute
+        if (confirm('Are you sure you want to delete the data for PRN Number: ' + prn + '?')) {
+            window.location.href = "/deleteSubmission?prn=" + prn;  // Redirect to delete endpoint with PRN as query param
+        }
+    }
+</script>
+
+</body>
+</html>

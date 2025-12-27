@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submitted Successfully</title>
+    <style>
+        /* General Body Styling */
+        body {
+            background-color: #f9f9f9;  /* Light background color */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative;
+        }
+
+        /* Container for Success Message */
+        .success-container {
+            text-align: center;
+            background-color: #d4edda;  /* Light Green background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #28a745;  /* Green color */
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* Go Back Button Styling */
+        .go-back {
+            background-color: #007bff;  /* Blue background */
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .go-back:hover {
+            background-color: #0056b3;  /* Darker blue on hover */
+        }
+
+        /* Home Button Styling */
+        .home-button {
+            background-color: #6c757d;  /* Grey background */
+            color: black;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #5a6368;  /* Darker grey on hover */
+        }
+
+        /* Success Icon Styling */
+        .icon {
+            font-size: 4em;
+            color: #28a745;  /* Green success icon */
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="success-container">
+    <!-- Success Icon -->
+    <div class="icon">✔️</div>
+    <h2>Form Submitted Successfully!</h2>
+    <p>Thank you for submitting your form. We have received your information.</p>
+</div>
+
+<!-- Go Back Button -->
+<a href="javascript:history.back()" class="go-back">Go Back</a>
+
+<!-- Home Button -->
+<a href="/" class="home-button">Home</a>
+
+</body>
+</html>
