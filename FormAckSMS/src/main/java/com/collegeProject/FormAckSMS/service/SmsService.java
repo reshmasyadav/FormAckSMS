@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 public class SmsService {
 
     // Twilio credentials (replace with your own Twilio account SID, Auth Token, and phone number)
-    public static final String ACCOUNT_SID = "TWILIO_ACCOUNT_SID";
-    public static final String AUTH_TOKEN = "TWILIO_AUTH_TOKEN";
+    public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
+    public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
     public static final String FROM_PHONE_NUMBER = "+19789459132";  // Your Twilio phone number
 
     // Method to send acknowledgment SMS
