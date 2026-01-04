@@ -3,14 +3,15 @@ package com.collegeProject.FormAckSMS.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "submission")
 public class Submission {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // this will auto increment of id in db table
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-    @Column(name = "prnNumber", unique = true)
+    @Column(unique = true)
     private String prnNumber;
     private String collegeName;
     private String gender;
